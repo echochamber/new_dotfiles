@@ -1,0 +1,21 @@
+[user]
+	email = jasonschein@gmail.com
+	name = Jason Schein
+[core]
+	editor = vim
+[diff]
+    tool = vscode
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+[merge]
+    tool = vscode
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
+
+
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+    am = "commit --amend --no-edit"
