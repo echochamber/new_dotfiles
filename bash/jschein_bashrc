@@ -1,8 +1,19 @@
 #!/bin/sh
 #########
+export HISTFILESIZE=1000000
+export PROMPT_COMMAND='history -a'
 
+
+
+# Rust
+if [[ -f "$HOME/.cargo/env" ]]; then
+    . "$HOME/.cargo/env"
+fi
+
+# Go
 export PATH=$PATH:/usr/local/go/bin
-source "$HOME/.cargo/env"
+export PATH=$PATH:$HOME/go/bin/
+
 
 function color_my_prompt {
     local __default_color="\[\033[37m\]"
@@ -30,13 +41,3 @@ function color_my_prompt {
 }
 
 color_my_prompt
-
-if [[ -f "$HOME/.cargo/env" ]]; then
-    . "$HOME/.cargo/env"
-fi
-
-# if [[ -f '~/gcloud/google-cloud-sdk/path.bash.inc' ]]; then
-#     . ~/gcloud/google-cloud-sdk/path.bash.inc
-# fi
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:$HOME/go/bin/

@@ -1,0 +1,18 @@
+
+alias tmt='tmux attach || tmux new-session'
+alias tma='tmux new-session -A -s '
+alias tmn='tmux new-session'
+alias tml='tmux ls'
+
+
+alias cdc='cd ~/Code'
+alias manapool='cd ~/Code/manapool'
+alias blaze='bazel'
+alias python=python3
+alias rerc=". ~/.bashrc"
+
+alias dockerex='docker rm $(docker ps -a -q -f status=exited)'
+
+function catless() {
+    cat "$1" | less
+}
