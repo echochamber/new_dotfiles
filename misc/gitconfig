@@ -11,11 +11,10 @@
     tool = vscode
 [mergetool "vscode"]
     cmd = code --wait $MERGED
-
-
 [alias]
 	co = checkout
 	br = branch
 	ci = commit
 	st = status
     am = "commit --amend --no-edit"
+	root = rev-parse --show-toplevel

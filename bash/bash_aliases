@@ -1,4 +1,5 @@
-
+#!/bin/sh
+#########
 alias tmt='tmux attach || tmux new-session'
 alias tma='tmux new-session -A -s '
 alias tmn='tmux new-session'
@@ -10,6 +11,7 @@ alias manapool='cd ~/Code/manapool'
 alias blaze='bazel'
 alias python=python3
 alias rerc=". ~/.bashrc"
+alias vim="nvim"
 
 alias dockerex='docker rm $(docker ps -a -q -f status=exited)'
 

@@ -1,0 +1,65 @@
+#!/bin/sh
+#########
+# From https://natelandau.com/bash-scripting-utilities/
+bold=$(tput bold)
+underline=$(tput sgr 0 1)
+reset=$(tput sgr0)
+
+purple=$(tput setaf 171)
+red=$(tput setaf 1)
+green=$(tput setaf 76)
+tan=$(tput setaf 3)
+blue=$(tput setaf 38)
+yellow=$(tput setaf 3)
+
+f_em()  { printf "${bold}${underline}%s${reset}" "$@"
+}
+f_info() { printf "${bold}${blue}%s${reset}" "$@"
+}
+f_err() { printf "${bold}${red}%s${reset}" "$@"
+}
+f_warn() { printf "${bold}${yellow}%s${reset}" "$@"
+}
+e_header() { printf "\n${bold}${purple}==========  %s  ==========${reset}\n" "$@"
+}
+e_arrow() { printf "➜ $@\n"
+}
+e_success() { printf "${green}✔ %s${reset}\n" "$@"
+}
+e_error() { printf "${red}✖ %s${reset}\n" "$@"
+}
+e_warning() { printf "${tan}➜ %s${reset}\n" "$@"
+}
+e_underline() { printf "${underline}${bold}%s${reset}\n" "$@"
+}
+e_bold() { printf "${bold}%s${reset}\n" "$@"
+}
+e_note() { printf "${underline}${bold}${blue}Note:${reset}  ${blue}%s${reset}\n" "$@"
+}
+
+
+seek_confirmation() {
+  printf "\n${bold}$@${reset}"
+  read -p " (y/n) " -n 1
+  printf "\n"
+}
+
+# Test whether the result of an 'ask' is a confirmation
+is_confirmed() {
+if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+  return 0
+fi
+return 1
+}
+#############################
+# Seek Confirmation Example #
+#############################
+# e_header "I am a sample script"
+
+# seek_confirmation "Do you want to print a success message?"
+# if is_confirmed; then
+#   e_success "Here is a success message"
+# else
+#   e_error "You did not ask for a success message"
+# fi
+#############################

@@ -4,7 +4,10 @@ export HISTFILESIZE=1000000
 export PROMPT_COMMAND='history -a'
 
 
-
+# Rust
+if [[ -f "$HOME/.bash_utils" ]]; then
+    . "$HOME/.bash_utils"
+fi
 # Rust
 if [[ -f "$HOME/.cargo/env" ]]; then
     . "$HOME/.cargo/env"
