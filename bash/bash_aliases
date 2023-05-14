@@ -18,3 +18,6 @@ alias dockerex='docker rm $(docker ps -a -q -f status=exited)'
 function catless() {
     cat "$1" | less
 }
+function gristory() {
+    history | grep "$1" | less
+}
