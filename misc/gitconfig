@@ -18,3 +18,8 @@
 	st = status
     am = "commit --amend --no-edit"
 	root = rev-parse --show-toplevel
+    cae = commit --amend --no-edit
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+[submodule]
+	recurse = true

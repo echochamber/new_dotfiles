@@ -1,12 +1,12 @@
-git_root="$(git rev-parse --show-toplevel)"
-backup_dir="${git_root}/backup"
+current_dir="$(realpath $( dirname -- "$0"; ))"
+backup_dir="${current_dir}/backup"
 
-. "${git_root}/bash/bash_utils"
+. "${current_dir}/bash/bash_utils"
 
 
 sync_dotfiles_dir() {
   syncdir="$1"
-  sync_backup="$backup_dir/$(echo "$syncdir" | sed -e "s@^$git_root/@@g" -e "s@\*@@g" -e "s@/\$@@g")"
+  sync_backup="$backup_dir/$(echo "$syncdir" | sed -e "s@^$current_dir/@@g" -e "s@\*@@g" -e "s@/\$@@g")"
   mkdir -p $sync_backup
   for f in $1
   do

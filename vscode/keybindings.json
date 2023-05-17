@@ -1,0 +1,12 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "ctrl+shift+/ m",
+        "command": "fileutils.moveFile"
+    },
+    {
+        "key": "ctrl+/ ctrl+b",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Bazel Build Selected Target"
+    }
+]

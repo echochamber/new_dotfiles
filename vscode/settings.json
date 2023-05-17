@@ -1,0 +1,15 @@
+{
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "files.associations": {
+        "*.bzlmod": "starlark"
+    },
+    "svelte.enable-ts-plugin": true,
+    "editor.tabSize": 2,
+    "editor.indentSize": "tabSize",
+    "workbench.colorTheme": "Default Dark+",
+    "settingsSync.ignoredSettings": [
+        "-bazel.buildifierExecutable"
+    ]
+}
