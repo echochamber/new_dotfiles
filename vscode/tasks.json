@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  // Bazel build target. Need to select the whole targets name with the cursor.
+  "tasks": [
+    {
+      "label": "Bazel Build Selected Target",
+      "type": "shell",
+      "command": "bazel build //${relativeFileDirname}:${selectedText}",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
