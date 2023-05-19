@@ -13,6 +13,9 @@ fi
 if [[ -f "$HOME/.cargo/env" ]]; then
     . "$HOME/.cargo/env"
 fi
+if [[ -f "/etc/bazel-complete.bash" ]]; then
+    . /etc/bazel-complete.bash
+fi
 
 # Go
 export PATH=$PATH:/usr/local/go/bin
