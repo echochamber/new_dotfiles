@@ -1,0 +1,46 @@
+#! /bin/bash
+bold="\[$(tput bold)\]"
+underline="\[$(tput sgr 0 1)\]"
+reset="\[$(tput sgr0)\]"
+
+purple="\[$(tput setaf 171)\]"
+red="\[$(tput setaf 1)\]"
+green="\[$(tput setaf 76)\]"
+tan="\[$(tput setaf 3)\]"
+blue="\[$(tput setaf 38)\]"
+yellow="\[$(tput setaf 3)\]"
+
+function color_my_prompt {
+    local __user_and_host="${tan}\u @ \h$reset"
+    local __cur_location="${reset}\w$reset"
+    git --version 2>&1 >/dev/null # improvement by tripleee
+    GIT_IS_AVAILABLE=$?
+    if [ $GIT_IS_AVAILABLE -eq 0 ]; then 
+        local __git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\\\\\1\/`'
+        local __git_branch_display="${green}branch:${reset} $__git_branch"
+    else
+        __git_branch_display="${green}branch:${reset} git isn't installed"
+    fi
+    local __venv_name=""
+    if [[ ! -z "$VIRTUAL_ENV" ]]; then
+        __venv_name="$(basename "$VIRTUAL_ENV")"
+    else
+        __venv_name=""
+    fi
+    local __venv_part="${red}venv${reset}: $__venv_name"
+    
+
+    local __prompt_tail="${reset}\$${bold}${reset}"
+    local __last_color="${reset}"
+
+    PS1="\n$reset"
+    PS1="$PS1┌─[$__user_and_host]-[$__cur_location]\n"
+    PS1="$PS1├─[$__git_branch_display]-[$__venv_part]\n"
+    PS1="$PS1└─[$__prompt_tail]>${reset} "
+    export PS1;
+}
+
+color_my_prompt
+
+
+

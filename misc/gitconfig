@@ -19,6 +19,7 @@
     am = "commit --amend --no-edit"
 	root = rev-parse --show-toplevel
     cae = commit --amend --no-edit
+    tree = "!f() { git log --graph --pretty=oneline --abbrev-commit --all -n ${1:-5}; }; f"
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
 [submodule]

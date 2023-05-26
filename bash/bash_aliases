@@ -15,6 +15,10 @@ alias python=python3
 alias rerc=". ~/.bashrc"
 alias vim="nvim"
 alias rpc="grpc_cli"
+alias bz="bazel"
+alias bzb="bazel build "
+alias bzq="bazel query "
+
 
 alias dockerex='docker rm $(docker ps -a -q -f status=exited)'
 

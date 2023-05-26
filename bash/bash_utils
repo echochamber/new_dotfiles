@@ -12,6 +12,32 @@ tan=$(tput setaf 3)
 blue=$(tput setaf 38)
 yellow=$(tput setaf 3)
 
+tpcolor () {
+  printf "$(tput setaf $1)"
+}
+
+
+color_8() {
+  printf "foreground: "; printf '\e[%sm ' {40..47} 0; echo
+  printf "background: "; printf '\e[%sm▒' {30..37} 0; echo
+}
+__js_color(){
+  for c; do
+      printf "\e[0m❙ " ; printf '\e[48;5;%dm%03d' $c $c
+  done
+  printf '\e[0m \n'
+}
+
+color_256() {
+  
+  IFS=$' \t\n'
+  __js_color {0..15}
+  for ((i=0;i<6;i++)); do
+      __js_color $(seq $((i*36+16)) $((i*36+51)))
+  done
+  __js_color {232..255}
+}
+
 f_em()  { printf "${bold}${underline}%s${reset}" "$@"
 }
 f_info() { printf "${bold}${blue}%s${reset}" "$@"
