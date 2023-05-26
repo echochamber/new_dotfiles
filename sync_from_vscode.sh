@@ -1,4 +1,4 @@
-
+#! /bin/bash
 current_dir="$(realpath $( dirname -- "$0"; ))"
 printf "$current_dir\n"
 cd "${current_dir}"

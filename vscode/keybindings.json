@@ -5,8 +5,17 @@
         "command": "fileutils.moveFile"
     },
     {
-        "key": "ctrl+/ ctrl+b",
+        "key": "ctrl+shift+/ b",
         "command": "workbench.action.tasks.runTask",
         "args": "Bazel Build Selected Target"
+    },
+    {
+        "key": "ctrl+shift+/ f",
+        "command": "copyRelativeFilePath",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+shift+/ v",
+        "command": "bazel.buildTarget"
     }
 ]

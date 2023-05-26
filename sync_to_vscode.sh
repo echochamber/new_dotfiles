@@ -1,4 +1,4 @@
-
+#! /bin/bash
 current_dir="$(dirname $( dirname -- "$0"; ))"
 cd current_dir
 . "${current_dir}/bash/bash_utils"
