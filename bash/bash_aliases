@@ -10,7 +10,6 @@ alias bz='bazel'
 alias g='git'
 alias cdc='cd ~/Code'
 alias manapool='cd ~/Code/manapool'
-alias blaze='bazel'
 alias python=python3
 alias rerc=". ~/.bashrc"
 alias vim="nvim"
@@ -18,6 +17,7 @@ alias rpc="grpc_cli"
 alias bz="bazel"
 alias bzb="bazel build "
 alias bzq="bazel query "
+alias grh="gristory"
 
 
 alias dockerex='docker rm $(docker ps -a -q -f status=exited)'
@@ -31,3 +31,9 @@ function gristory() {
 function pless() {
     $@ 2>&1 | less
 }
+
+# Makes bash completion for alias'd commands.
+if [[ -r $HOME/.bash_completion ]]; then
+    . $HOME/.bash_completion
+fi
+
