@@ -21,8 +21,9 @@ fi
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin/
 
-if [[ -f "$HOME/Code/python/venvs/default/bin/activate" ]]; then
-    . $HOME/Code/python/venvs/default/bin/activate
+defvenv="default"
+if [[ -f "$HOME/Code/python/venvs/${defvenv}/bin/activate" ]]; then
+    . "$HOME/Code/python/venvs/${defvenv}/bin/activate"
 fi
 
 export RT="$HOME/Code/rust/rustdocker"
