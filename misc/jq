@@ -1,0 +1,2 @@
+def coalesce(s): first(s | select(. != null) | select(. != []));
+

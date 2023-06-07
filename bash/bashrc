@@ -127,3 +127,4 @@ fi
 if [ -f ~/.jschein_bashrc ]; then
     . ~/.jschein_bashrc
 fi
+
