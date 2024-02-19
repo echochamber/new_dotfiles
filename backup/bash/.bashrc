@@ -1,5 +1,3 @@
-#!/bin/sh
-#########
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -117,22 +115,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-
-# The next line updates PATH for the Google Cloud SDK.
-
-# if [[ -f '~/gcloud/google-cloud-sdk/path.bash.inc' ]]; then
-#     . ~/gcloud/google-cloud-sdk/path.bash.inc
-# fi
-if [ -f ~/.jschein_bashrc ]; then
-    . ~/.jschein_bashrc
-fi
-
-
-# pnpm
-export PNPM_HOME="/home/jschein/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
