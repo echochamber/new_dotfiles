@@ -20,6 +20,10 @@ alias bzq="bazel query "
 alias bzqb="bazel query --output=build "
 alias grh="gristory"
 
+# Gcloud
+alias gcp="gcloud"
+alias gcpswitch="gcloud config configurations activate "
+
 
 alias dockerex='docker rm $(docker ps -a -q -f status=exited)'
 
@@ -40,7 +44,34 @@ function join_by {
   fi
 }
 
+function psgrep {
+  ps -ef  | head -1; ps -ef  | grep -v grep | grep "$1"
+}
+
+function getport {
+  sudo lsof -n -i ":$1" | head -1; sudo lsof -n -i ":$1" | grep LISTEN
+}
+
 # Makes bash completion for alias'd commands.
 if [[ -r $HOME/.bash_completion ]]; then
     . $HOME/.bash_completion
 fi
+
+
+# GCP Stuff
+function gcp_info() {
+  PROJECT_NUMBER="$(gcloud projects list --filter="$(gcloud config get-value project)"  --format="value(PROJECT_NUMBER)")"
+  PROJECT_ID="$(gcloud config get-value project)"
+  printf %s "" "$PROJECT_ID" " " "$PROJECT_NUMBER"
+}
+# Auth to GCP using the provided config name.
+function gcpauth() {
+  if [[ -n "$1" ]]; then
+    config_name="$1"
+    gcloud config configurations activate "$config_name"
+  fi
+  gcloud auth login --update-adc
+  gcloud auth application-default set-quota-project "$(gcloud config get project)"
+}
+alias cdupsell="cd $HOME/Code/mahon/upsell/"
+

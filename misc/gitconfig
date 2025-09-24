@@ -2,7 +2,7 @@
 	email = jasonschein@gmail.com
 	name = Jason Schein
 [core]
-	editor = vim
+	editor = nvim
 [diff]
     tool = vscode
 [difftool "vscode"]
@@ -24,3 +24,5 @@
 	insteadOf = https://github.com/
 [submodule]
 	recurse = true
+[init]
+	defaultBranch = main

@@ -5,10 +5,10 @@
 # for examples
 
 # If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+# case $- in
+#     *i*) ;;
+#      *) return;;
+# esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -124,9 +124,6 @@ fi
 # if [[ -f '~/gcloud/google-cloud-sdk/path.bash.inc' ]]; then
 #     . ~/gcloud/google-cloud-sdk/path.bash.inc
 # fi
-if [ -f ~/.jschein_bashrc ]; then
-    . ~/.jschein_bashrc
-fi
 
 
 # pnpm
@@ -136,3 +133,15 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+. "$HOME/.cargo/env"
+export BROWSER=wslview
+
+complete -C /usr/bin/terraform terraform
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+if [ -f ~/.jschein_bashrc ]; then
+    . ~/.jschein_bashrc
+fi
