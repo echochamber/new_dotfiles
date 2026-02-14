@@ -1,0 +1,174 @@
+#!/bin/zsh
+
+
+# Common helper: convert common escaped sequences to their actual characters.
+# Reads from stdin, writes to stdout.
+function hist_unescape() {
+    perl -pe '
+        s/\\r/\r/g;
+        s/\\t/\t/g;
+        s/\\n/\n/g;
+        s/\\\\/\\/g;
+    '
+}
+
+function gristory() {
+    history | grep "$1" | hist_unescape | less
+}
+
+# "escaped grep history": grep history and render escapes for display.
+function egristory() {
+    history | grep -- "$1" | hist_unescape | less -R
+}
+
+# Copy a given history entry number to macOS clipboard, after unescaping.
+function copyhist() {
+    local num="$1"
+
+    if [[ -z "$num" || ! "$num" =~ ^[0-9]+$ ]]; then
+        echo "Usage: copyhist <history-number>"
+        return 1
+    fi
+
+    local cmd
+    cmd=$(history | sed -n "s/^ *$num  *//p")
+
+    if [[ -z "$cmd" ]]; then
+        echo "No history entry found for number $num"
+        return 1
+    fi
+
+    printf '%s' "$cmd" | hist_unescape | pbcopy
+    echo "History entry $num copied to clipboard."
+}
+
+
+
+# Tmux
+alias tmt='tmux attach || tmux new-session'
+alias tma='tmux new-session -A -s '
+alias tmn='tmux new-session'
+alias tml='tmux ls'
+
+# Navigation
+alias cdc='cd ~/Code'
+alias manapool='cd ~/Code/manapool'
+
+# Tools
+alias pnp="pnpm"
+alias python=python3
+
+# Docker
+alias dockerex='docker rm $(docker ps -a -q -f status=exited)'
+function psgrep {
+  ps -ef  | head -1; ps -ef  | grep -v grep | grep "$1"
+}
+
+function getport {
+  sudo lsof -n -i ":$1" | head -1; sudo lsof -n -i ":$1" | grep LISTEN
+}
+
+alias gdb="git branch -D "
+alias ter="terraform"
+# gcloud shortcuts: gcp adc, gcp login, gcp project, or gcp <anything> passes through to gcloud
+# (override oh-my-zsh git plugin's gcp=git cherry-pick)
+unalias gcp 2>/dev/null
+function gcp() {
+  case "$1" in
+    adc)     shift; gcloud auth application-default login "$@" ;;
+    login)   shift; gcloud auth login "$@" ;;
+    project) shift; gcloud config set project "$@" ;;
+    *)       gcloud "$@" ;;
+  esac
+}
+
+alias psqlt='psql "postgresql://postgres:postgres@localhost:64322/postgres" '
+alias mbp='bash /Users/jschein/Code/manapool/manapool/dev/mpb.sh '
+    
+function tmpf() {
+    cat > ./tmpfile.txt
+}
+function vless() {
+  vim -u NONE -R +'set nomodifiable readonly buftype=nofile noswapfile' -
+}
+
+function catless() { cat "$1" | less }
+function pless() { "$@" 2>&1 | less }
+
+function join_by() {
+  local d=${1-} f=${2-}
+  if shift 2; then
+    printf %s "$f" "${@/#/$d}"
+  fi
+}
+
+# Show current gcloud project ID and number.
+function gcp_info() {
+  local project_id="$(gcloud config get-value project 2>/dev/null)"
+  local project_number="$(gcloud projects list --filter="$project_id" --format="value(PROJECT_NUMBER)" 2>/dev/null)"
+  printf "%s %s\n" "$project_id" "$project_number"
+}
+
+# Auth to GCP, optionally switching config first. Sets up ADC and quota project.
+function gcpauth() {
+  if [[ -n "$1" ]]; then
+    gcloud config configurations activate "$1"
+  fi
+  gcloud auth login --update-adc
+  gcloud auth application-default set-quota-project "$(gcloud config get project)"
+}
+
+
+# Delete entries from bash history file.
+function hist_purge() {
+    local pattern="$1"
+    local count
+
+    if [[ -z "$pattern" ]]; then
+        print "Usage: hist_purge <pattern>"
+        return 1
+    fi
+
+    # Count matching entries (binary-safe)
+    count=$(LANG=C grep -c -- "$pattern" "$HISTFILE")
+
+    if (( count == 0 )); then
+        print "No history entries match: $pattern"
+        return 0
+    fi
+
+    print "This will permanently delete $count history entr$( ((count == 1)) && print "y" || print "ies" ) matching:"
+    print "  $pattern"
+    print -n "Continue? [y/N] "
+
+    read -q reply
+    print
+
+    if [[ "$reply" != [yY] ]]; then
+        print "Aborted."
+        return 0
+    fi
+
+    print "Purging from: $HISTFILE"
+    LANG=C sed -i '' "/$pattern/d" "$HISTFILE" && fc -R
+}
+
+
+# Grep changed lines vs dev, printing truncated path + line number.
+function cgrep() {
+  git diff --unified=0 --no-color dev... |
+    awk '
+      /^diff --git/ { file=$4; sub("^b/","",file) }
+      /^@@/ {
+        match($0, /[+]([0-9]+)/, m)
+        line=m[1]
+        next
+      }
+      /^[+-][^+-]/ {
+        p=file
+        if (length(p) > 60) p = "…" substr(p, length(p)-59)
+        printf "%s:%d:%s\n", p, line++, substr($0,2)
+      }
+    ' |
+    grep "$@"
+}
