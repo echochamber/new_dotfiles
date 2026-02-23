@@ -83,7 +83,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting autojump)
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH"/oh-my-zsh.sh
 
 # User configuration
 
@@ -153,7 +153,7 @@ load-nvmrc
 PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 alias vim="nvim"
 
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.claude/scripts:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/jschein/Code/manapool/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jschein/Code/manapool/google-cloud-sdk/path.zsh.inc'; fi
@@ -182,12 +182,17 @@ wt-add() {
 
   git worktree add -b "$branch" "$worktree_path" "$base"
 
-  # Symlink Claude Code settings if they exist
-  if [ -f "$repo_root/.claude/settings.local.json" ]; then
-    mkdir -p "$worktree_path/.claude"
-    ln -sf "$repo_root/.claude/settings.local.json" "$worktree_path/.claude/settings.local.json"
-    echo "Linked Claude Code settings"
-  fi
+  # Symlink Claude Code local config files if any exist
+  local claude_files=(settings.local.json CLAUDE.local.md hook-config.local.json)
+  local linked_claude=0
+  for f in "${claude_files[@]}"; do
+    if [ -f "$repo_root/.claude/$f" ]; then
+      mkdir -p "$worktree_path/.claude"
+      ln -sf "$repo_root/.claude/$f" "$worktree_path/.claude/$f"
+      linked_claude=1
+    fi
+  done
+  [ "$linked_claude" -eq 1 ] && echo "Linked Claude Code local config"
 
   # Symlink .env if it exists (but not variants like .env.local, local.env, etc.)
   if [ -f "$repo_root/.env" ]; then
@@ -200,6 +205,12 @@ wt-add() {
     mkdir -p "$worktree_path/.beads"
     echo "../${repo_name}/.beads" > "$worktree_path/.beads/redirect"
     echo "Created beads redirect"
+  fi
+
+  # Symlink .vercel directory if it exists (for Vercel CLI project linking)
+  if [ -d "$repo_root/.vercel" ]; then
+    ln -sf "$repo_root/.vercel" "$worktree_path/.vercel"
+    echo "Linked .vercel"
   fi
 
   echo ""
@@ -223,12 +234,17 @@ wt-open() {
 
   git worktree add "$worktree_path" "$branch"
 
-  # Symlink Claude Code settings if they exist
-  if [ -f "$repo_root/.claude/settings.local.json" ]; then
-    mkdir -p "$worktree_path/.claude"
-    ln -sf "$repo_root/.claude/settings.local.json" "$worktree_path/.claude/settings.local.json"
-    echo "Linked Claude Code settings"
-  fi
+  # Symlink Claude Code local config files if any exist
+  local claude_files=(settings.local.json CLAUDE.local.md hook-config.local.json)
+  local linked_claude=0
+  for f in "${claude_files[@]}"; do
+    if [ -f "$repo_root/.claude/$f" ]; then
+      mkdir -p "$worktree_path/.claude"
+      ln -sf "$repo_root/.claude/$f" "$worktree_path/.claude/$f"
+      linked_claude=1
+    fi
+  done
+  [ "$linked_claude" -eq 1 ] && echo "Linked Claude Code local config"
 
   # Symlink .env if it exists (but not variants like .env.local, local.env, etc.)
   if [ -f "$repo_root/.env" ]; then
@@ -241,6 +257,12 @@ wt-open() {
     mkdir -p "$worktree_path/.beads"
     echo "../${repo_name}/.beads" > "$worktree_path/.beads/redirect"
     echo "Created beads redirect"
+  fi
+
+  # Symlink .vercel directory if it exists (for Vercel CLI project linking)
+  if [ -d "$repo_root/.vercel" ]; then
+    ln -sf "$repo_root/.vercel" "$worktree_path/.vercel"
+    echo "Linked .vercel"
   fi
 
   echo ""
@@ -295,10 +317,9 @@ wt-cd() {
   local safe_branch=$(echo "$branch" | tr '/' '-')
   local worktree_path="$(dirname "$repo_root")/${repo_name}-${safe_branch}"
 
-  cd "$worktree_path"
+  cd "$worktree_path" || return
 }
 
-eval "$(direnv hook zsh)"
 
 # =============================================================================
 # AI Tasks Functions
@@ -318,3 +339,4 @@ _update_beads_dir() {
 add-zsh-hook chpwd _update_beads_dir
 _update_beads_dir
 
+export PATH="$HOME/Code/ClaudeUtils/linear-sync/bin:$PATH"
