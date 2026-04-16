@@ -1,6 +1,7 @@
 set nocompatible   " Disable vi-compatibility
 set nu
 
+
 " Swap files out of the project root
 set backupdir=~/.vim/backup/
 set directory=~/.vim/swap/
@@ -158,3 +159,10 @@ autocmd Filetype c,cpp,php,rs,java,py BufWritePre <buffer> :%s/\s\+$//e
 
 au BufRead,BufNewFile *.md setlocal textwidth=120
 au FileType yaml setlocal tabstop=2 shiftwidth=2
+
+" Make Ctrl+Shift+, exit vim.
+" " Quit when you press qq
+nnoremap qq :q<CR>
+inoremap qq <Esc>:q<CR>
+
+

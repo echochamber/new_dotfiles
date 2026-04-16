@@ -1,8 +1,13 @@
 #! /bin/bash
-current_dir="$(realpath $( dirname -- "$0"; ))"
-printf "$current_dir\n"
-cd "${current_dir}"
-. "${current_dir}/bash/bash_utils"
+current_dir="$(realpath "$( dirname -- "$0"; )")"
+printf '%s\n' "$current_dir"
+cd "${current_dir}" || exit
+bash_utils_path="${current_dir}/bash/bash_utils"
+# shellcheck source=bash/bash_utils
+# shellcheck disable=SC1091
+source "$bash_utils_path"
 
-rsync -avz /home/jschein/.config/Code/User/keybindings.json "${current_dir}/vscode/keybindings.json"
-rsync -avz /home/jschein/.config/Code/User/settings.json "${current_dir}/vscode/settings.json"
+vscode_path=$(get_vscode_path)
+
+rsync -avz "${vscode_path}/keybindings.json" "${current_dir}/vscode/keybindings.json"
+rsync -avz "${vscode_path}/settings.json" "${current_dir}/vscode/settings.json"

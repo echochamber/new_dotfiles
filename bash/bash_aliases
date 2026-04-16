@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #########
 alias tmt='tmux attach || tmux new-session'
 alias tma='tmux new-session -A -s '
@@ -34,7 +34,7 @@ function gristory() {
     history | grep "$1" | less
 }
 function pless() {
-    $@ 2>&1 | less
+    "$@" 2>&1 | less
 }
 
 function join_by {
@@ -45,7 +45,7 @@ function join_by {
 }
 
 function psgrep {
-  ps -ef  | head -1; ps -ef  | grep -v grep | grep "$1"
+  ps -ef  | head -1; pgrep -afl "$1"
 }
 
 function getport {
@@ -54,7 +54,8 @@ function getport {
 
 # Makes bash completion for alias'd commands.
 if [[ -r $HOME/.bash_completion ]]; then
-    . $HOME/.bash_completion
+    # shellcheck source=/dev/null
+    . "$HOME/.bash_completion"
 fi
 
 
@@ -73,5 +74,43 @@ function gcpauth() {
   gcloud auth login --update-adc
   gcloud auth application-default set-quota-project "$(gcloud config get project)"
 }
-alias cdupsell="cd $HOME/Code/mahon/upsell/"
+alias cdupsell='cd $HOME/Code/mahon/upsell/'
+function tmpf() {
+    cat > ./tmpfile.txt
+}
 
+function vless() {
+  vim -u NONE -R +'set nomodifiable readonly buftype=nofile noswapfile' -
+}
+
+cgrep() {
+  if [ $# -eq 0 ]; then
+    echo "usage: git cgrep <grep-args...>"
+    return 2
+  fi
+
+  git diff --unified=0 --no-color dev... |
+    awk '
+      /^diff --git/ {
+        file=$4
+        sub("^b/","",file)
+        next
+      }
+
+      /^@@/ {
+        # Extract the "+<start>" part from: @@ -a,b +c,d @@
+        h=$0
+        sub(/^@@[^+]*\+/, "", h)     # drop everything through the "+"
+        sub(/[, ].*$/, "", h)       # keep only the starting line number
+        line = h + 0
+        next
+      }
+
+      /^[+-][^+-]/ {
+        p=file
+        if (length(p) > 60) p = "…" substr(p, length(p)-59)
+        printf "%s:%d:%s\n", p, line++, substr($0,2)
+      }
+    ' |
+    grep "$@"
+}

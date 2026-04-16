@@ -1,3 +1,4 @@
+#!/bin/bash
 current_dir="$(realpath $( dirname -- "$0"; ))"
 backup_dir="${current_dir}/backup"
 
@@ -25,5 +26,6 @@ sync_dotfiles_dir() {
     ln -s $f $HOME/.$basen
   done
 }
-sync_dotfiles_dir "$HOME/jschein_dotfiles/bash/*"
-sync_dotfiles_dir "$HOME/jschein_dotfiles/misc/*"
+# sync_dotfiles_dir "$HOME/jschein_dotfiles/bash/*"
+sync_dotfiles_dir "$HOME/jschein_dotfiles/zsh/*"
+# sync_dotfiles_dir "$HOME/jschein_dotfiles/misc/*"

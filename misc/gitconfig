@@ -13,16 +13,35 @@
     cmd = code --wait $MERGED
 [alias]
 	co = checkout
-	br = branch
+	b = branch
 	ci = commit
 	st = status
-    am = "commit --amend --no-edit"
+	am = "commit --amend --no-edit"
 	root = rev-parse --show-toplevel
-    cae = commit --amend --no-edit
-    tree = "!f() { git log --graph --pretty=oneline --abbrev-commit --all -n ${1:-5}; }; f"
+	cae = commit --amend --no-edit
+	tree = "!f() { git log --graph --pretty=oneline --abbrev-commit --all -n ${1:-5}; }; f"
+	changed = diff --name-status dev...HEAD
+  cgrep = "!bash -lc 'cgrep \"$@\"' -"
+
+	ldf = "!f() { base=${1:-dev}; target=${2:-HEAD}; git diff --name-only \"$base\"...\"$target\"; }; f"
+	lcf = !git diff $(git merge-base origin/dev HEAD) HEAD -- \"$1\"
+	gone-list = !git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $1}'
+	gone = !git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D
+	ghmerged = !bash -c \"comm -12 <(git branch --format=\\\"%(refname:short)\\\" | sort) <(gh pr list --author @me --base dev --state merged --limit 500 --json headRefName --jq \\\".[].headRefName\\\" | sort)\"
+	fpush = push --force-with-lease
+
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
 [submodule]
 	recurse = true
 [init]
 	defaultBranch = main
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[push]
+	default = current
+[fetch]
+	prune = true

@@ -1,2 +1,3 @@
-def coalesce(s): first(s | select(. != null) | select(. != []));
+#!/usr/bin/env -S jq -f
 
+# def coalesce(s): first(s | select(. != null) | select(. != []))

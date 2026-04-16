@@ -35,10 +35,6 @@ if [[ -f "$HOME/.bash_theme" ]]; then
 fi
 
 # Make sure to install nvm.
-export NODE_PATH=/usr/lib/node_modules
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Install angular, then uncomment this line.
 # source <(ng completion script)
@@ -52,9 +48,44 @@ fi
 
 # WSL Stuff
 # export BROWSER=wslview
-alias BROWSER="/mnt/Program Files/Google/Chrome/Application/chrome.exe"
+# Check if running in WSL
+if grep -qi microsoft /proc/version 2>/dev/null; then
+  alias BROWSER="/mnt/Program Files/Google/Chrome/Application/chrome.exe"
+fi
 
 
-# postgres
-PATH=$PATH:/usr/lib/postgresql/14/bin
-export PATH
+# pnpm
+export PNPM_HOME="/home/jschein/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+. "$HOME/.cargo/env"
+export BROWSER=wslview
+
+complete -C /usr/bin/terraform terraform
+export NODE_PATH=/usr/lib/node_modules
+export NVM_DIR="$HOME/.nvm"
+nvm() {
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  unset -f nvm node npm
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  nvm "$@"
+}
+node() {
+  unset -f nvm node npm
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  node "$@"
+}
+npm() {
+  unset -f nvm node npm
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  npm "$@"
+}
+
+if [ -f ~/.jschein_bashrc ] && [ "$BASH_SOURCE" != ~/.jschein_bashrc ] && [ "$BASH_SOURCE" != "$HOME/.jschein_bashrc" ]; then
+  . ~/.jschein_bashrc
+fi
+
+. "$HOME/.local/bin/env"

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #########
 # From https://natelandau.com/bash-scripting-utilities/
 bold=$(tput bold)
@@ -48,7 +48,7 @@ f_warn() { printf "${bold}${yellow}%s${reset}" "$@"
 }
 e_header() { printf "\n${bold}${purple}==========  %s  ==========${reset}\n" "$@"
 }
-e_arrow() { printf "➜ $@\n"
+e_arrow() { printf "➜ %s\n" "$*"
 }
 e_success() { printf "${green}✔ %s${reset}\n" "$@"
 }
@@ -65,7 +65,7 @@ e_note() { printf "${underline}${bold}${blue}Note:${reset}  ${blue}%s${reset}\n"
 
 
 seek_confirmation() {
-  printf "\n${bold}$@${reset}"
+  printf "\n${bold}%s${reset}" "$*"
   read -p " (y/n) " -n 1
   printf "\n"
 }
@@ -89,3 +89,14 @@ return 1
 #   e_error "You did not ask for a success message"
 # fi
 #############################
+
+get_vscode_path() {
+  if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    echo "$HOME/.config/Code/User"
+  elif [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "$HOME/Library/Application Support/Code/User"
+  else
+    f_error "Unsupported OS type: $OSTYPE"
+    exit 1
+  fi
+}

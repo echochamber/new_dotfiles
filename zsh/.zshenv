@@ -5,5 +5,8 @@ case "$PWD" in
   /Users/jschein/Code/manapool/*)
     export BEADS_DIR=/Users/jschein/Code/manapool/manapool/.beads
     ;;
+  *)
+    unset BEADS_DIR
+    ;;
 esac
 

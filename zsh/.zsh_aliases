@@ -46,7 +46,7 @@ function copyhist() {
 
 # Tmux
 alias tmt='tmux attach || tmux new-session'
-alias tma='tmux new-session -A -s '
+function tma() { tmux new-session -A -s "${1:-main}"; }
 alias tmn='tmux new-session'
 alias tml='tmux ls'
 
@@ -171,4 +171,14 @@ function cgrep() {
       }
     ' |
     grep "$@"
+}
+
+function vitecache() {
+    local dir="node_modules/.vite"
+    if [[ ! -d "$dir" ]]; then
+        echo "No $dir directory found."
+        return 1
+    fi
+    echo "Will delete: $dir ($(du -sh "$dir" | cut -f1))"
+    read -q "?Proceed? [y/N] " && echo && rm -rf "$dir" && echo "Deleted." || echo "\nAborted."
 }

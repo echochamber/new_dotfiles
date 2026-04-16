@@ -1,21 +1,28 @@
-// Place your key bindings in this file to override the defaultsauto[]
+// Place your key bindings in this file to override the defaults
 [
-    {
-        "key": "ctrl+shift+/ m",
-        "command": "fileutils.moveFile"
-    },
-    {
-        "key": "ctrl+shift+/ b",
-        "command": "workbench.action.tasks.runTask",
-        "args": "Bazel Build Selected Target"
-    },
-    {
-        "key": "ctrl+shift+/ f",
-        "command": "copyRelativeFilePath",
-        "when": "editorFocus"
-    },
-    {
-        "key": "ctrl+shift+/ v",
-        "command": "bazel.buildTarget"
-    }
+  {
+    "key": "shift+cmd+/ d",
+    "command": "copyRelativeFilePath"
+  },
+  {
+    "key": "shift+cmd+/ l",
+    "command": "issue.copyGithubPermalink"
+  },
+  {
+    "key": "shift+cmd+/ f",
+    "command": "copyFilePath",
+  },
+  {
+    "key": "ctrl+shift+/ m",
+    "command": "fileutils.moveFile"
+  },
+  {
+    "key": "ctrl+shift+/ b",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Bazel Build Selected Target"
+  },
+  {
+    "key": "ctrl+shift+/ v",
+    "command": "bazel.buildTarget"
+  }
 ]

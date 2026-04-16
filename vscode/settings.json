@@ -1,45 +1,372 @@
 {
-    "files.associations": {
-        "*.bzlmod": "starlark"
+  "files.associations": {
+    "*.bzlmod": "starlark"
+  },
+  "svelte.enable-ts-plugin": true,
+  "editor.tabSize": 2,
+  "editor.indentSize": "tabSize",
+  "workbench.colorTheme": "Default Dark+",
+  "settingsSync.ignoredSettings": [
+    "-bazel.buildifierExecutable",
+    "-bazel.executable"
+  ],
+  "bazel.pathsToIgnore": [".bazel/"],
+  "bazel.enableCodeLens": true,
+  "editor.rulers": [80, 120],
+  "[markdown]": {
+    "editor.rulers": [100],
+    "rewrap.wrappingColumn": 100,
+    "rewrap.autoWrap.enabled": true,
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 100,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[starlark]": {
+    "editor.rulers": [120],
+    "rewrap.wrappingColumn": 120,
+    "rewrap.autoWrap.enabled": true,
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 120
+  },
+  "pylint.args": ["--indent-string='  '"],
+  "autopep8.args": ["--indent-size=2"],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [100],
+    "rewrap.wrappingColumn": 100,
+    "rewrap.autoWrap.enabled": true,
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 100
+  },
+  "[sql]": {
+    "editor.formatOnSave": false
+  },
+  "[rust]": {
+    "editor.rulers": [100, 120],
+    "rewrap.wrappingColumn": 100,
+    "rewrap.autoWrap.enabled": true,
+    "editor.tabSize": 4
+  },
+  "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "always"
     },
-    "svelte.enable-ts-plugin": true,
-    "editor.tabSize": 2,
-    "editor.indentSize": "tabSize",
-    "workbench.colorTheme": "Default Dark+",
-    "settingsSync.ignoredSettings": [
-        "-bazel.buildifierExecutable",
-        "-bazel.executable"
-    ],
-    "bazel.pathsToIgnore": [
-        ".bazel/"
-    ],
-    "bazel.enableCodeLens": true,
-    "editor.rulers": [80,120],
-    "[markdown]": {
-        "editor.rulers": [100],
-        "rewrap.wrappingColumn": 100,
-        "rewrap.autoWrap.enabled": true,
-        "editor.wordWrap": "bounded",
-        "editor.wordWrapColumn": 100
-    
-    },
-    "[starlark]": {
-        "editor.rulers": [120],
-        "rewrap.wrappingColumn": 120,
-        "rewrap.autoWrap.enabled": true,
-        "editor.wordWrap": "bounded",
-        "editor.wordWrapColumn": 120
-    },
-    "[python]": {
-        "editor.formatOnType": true,
-        "editor.rulers": [80],
-        "rewrap.wrappingColumn": 80,
-        "rewrap.autoWrap.enabled": true,
-        "editor.wordWrap": "bounded",
-        "editor.wordWrapColumn": 80
-    },
-    "[rust]": {
-        "rewrap.wrappingColumn": 100,
-        "rewrap.autoWrap.enabled": true,
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  // "rust-analyzer.cargo.target": "wasm32-unknown-unknown",
+  "editor.minimap.enabled": false,
+  "editor.inlineSuggest.enabled": true,
+  "go.toolsManagement.autoUpdate": true,
+  "githubPullRequests.pullBranch": "never",
+  // Disable alt focusing the menu bar.
+  "window.customMenuBarAltFocus": false,
+  "window.titleBarStyle": "custom",
+  "application.shellEnvironmentResolutionTimeout": 15,
+  "git.openRepositoryInParentFolders": "never",
+  "vue.server.hybridMode": true,
+  "geminicodeassist.project": "mahon-media-sandbox",
+  "diffEditor.codeLens": true,
+  "npm.packageManager": "yarn",
+  "terminal.integrated.automationProfile.linux": {
+    "path": "bash",
+    "icon": "terminal-bash",
+    "args": ["-i"]
+  },
+  "workbench.iconTheme": "vscode-icons",
+  "vs-kubernetes": {
+    "vscode-kubernetes.kubectl-path-linux": "/home/jschein/.local/state/vs-kubernetes/tools/kubectl/kubectl",
+    "vscode-kubernetes.helm-path-linux": "/home/jschein/.local/state/vs-kubernetes/tools/helm/linux-amd64/helm",
+    "vscode-kubernetes.minikube-path-linux": "/home/jschein/.local/state/vs-kubernetes/tools/minikube/linux-amd64/minikube",
+    "vs-kubernetes.minikube-show-information-expiration": "2025-10-16T03:10:23.482Z"
+  },
+  "cloudcode.project": "jschein-pubsub-dev",
+  "vsicons.dontShowNewVersionMessage": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "docker.extension.enableComposeLanguageServer": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.blame.editorDecoration.enabled": true,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true,
+    "/tmp/postman-http-request-post-response.instructions.md": true,
+    "/tmp/postman-http-request-pre-request.instructions.md": true,
+    "/tmp/postman-collections-post-response.instructions.md": true,
+    "/tmp/postman-collections-pre-request.instructions.md": true,
+    "/tmp/postman-folder-post-response.instructions.md": true,
+    "/tmp/postman-folder-pre-request.instructions.md": true,
+    "C:\\Users\\jason\\AppData\\Local\\Temp\\postman-collections-post-response.instructions.md": true,
+    "C:\\Users\\jason\\AppData\\Local\\Temp\\postman-collections-pre-request.instructions.md": true,
+    "C:\\Users\\jason\\AppData\\Local\\Temp\\postman-folder-post-response.instructions.md": true,
+    "C:\\Users\\jason\\AppData\\Local\\Temp\\postman-folder-pre-request.instructions.md": true,
+    "C:\\Users\\jason\\AppData\\Local\\Temp\\postman-http-request-post-response.instructions.md": true,
+    "C:\\Users\\jason\\AppData\\Local\\Temp\\postman-http-request-pre-request.instructions.md": true
+  },
+  "maven.terminal.favorites": [
+    {
+      "alias": "spring run",
+      "command": "spring-boot:run"
     }
+  ],
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "remote.autoForwardPortsSource": "hybrid",
+  "postman.mcp.notifications.postmanMCP": false,
+  "editor.codeActionsOnSave": {},
+  "editor.linkedEditing": true,
+  "editor.unicodeHighlight.includeComments": true,
+  "workbench.colorCustomizations": {
+    "[Default Dark Modern]": {
+      "tab.activeBorderTop": "#00FF00",
+      "tab.unfocusedActiveBorderTop": "#00FF0088",
+      "textCodeBlock.background": "#00000055"
+    },
+    "editor.wordHighlightStrongBorder": "#FF6347",
+    "editor.wordHighlightBorder": "#FFD700",
+    "editor.selectionHighlightBorder": "#A9A9A9"
+  },
+  "workbench.editor.revealIfOpen": true,
+  "emmet.variables": {
+    "lang": "en"
+  },
+  "cSpell.diagnosticLevel": "Hint",
+  "trailing-spaces.backgroundColor": "rgba(255,0,0,0.1)",
+  "trailing-spaces.includeEmptyLines": false,
+  "terminal.integrated.tabs.hideCondition": "never",
+  "terminal.integrated.enablePersistentSessions": false,
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.detectJdksAtStart": false,
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.debug.settings.hotCodeReplace": "auto",
+  "java.dependency.packagePresentation": "hierarchical",
+  "java.maxConcurrentBuilds": 12,
+  "java.sources.organizeImports.staticStarThreshold": 1,
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "bash",
+      "env": {
+        "JAVA_HOME": "/home/jschein/.vscode-server/data/User/globalStorage/pleiades.java-extension-pack-jdk/java/latest"
+      },
+      "args": [
+        "--rcfile",
+        "/home/jschein/.vscode-server/data/User/globalStorage/pleiades.java-extension-pack-jdk/.bashrc"
+      ]
+    },
+    "JavaSE-1.8 LTS": {
+      "overrideName": true,
+      "env": {
+        "JAVA_HOME": "/home/jschein/.vscode-server/data/User/globalStorage/pleiades.java-extension-pack-jdk/java/8"
+      },
+      "path": "bash",
+      "args": [
+        "--rcfile",
+        "/home/jschein/.vscode-server/data/User/globalStorage/pleiades.java-extension-pack-jdk/.bashrc"
+      ]
+    },
+    "JavaSE-11 LTS": {
+      "overrideName": true,
+      "env": {
+        "JAVA_HOME": "/usr/lib/jvm/java-11-openjdk-amd64"
+      },
+      "path": "bash",
+      "args": [
+        "--rcfile",
+        "/home/jschein/.vscode-server/data/User/globalStorage/pleiades.java-extension-pack-jdk/.bashrc"
+      ]
+    },
+    "JavaSE-17 LTS": {
+      "overrideName": true,
+      "env": {
+        "JAVA_HOME": "/usr/lib/jvm/java-17-openjdk-amd64"
+      },
+      "path": "bash",
+      "args": [
+        "--rcfile",
+        "/home/jschein/.vscode-server/data/User/globalStorage/pleiades.java-extension-pack-jdk/.bashrc"
+      ]
+    },
+    "JavaSE-21 LTS": {
+      "overrideName": true,
+      "env": {
+        "JAVA_HOME": "/home/jschein/.vscode-server/data/User/globalStorage/pleiades.java-extension-pack-jdk/java/21"
+      },
+      "path": "bash",
+      "args": [
+        "--rcfile",
+        "/home/jschein/.vscode-server/data/User/globalStorage/pleiades.java-extension-pack-jdk/.bashrc"
+      ]
+    },
+    "JavaSE-25 LTS": {
+      "overrideName": true,
+      "env": {
+        "JAVA_HOME": "/home/jschein/.vscode-server/data/User/globalStorage/pleiades.java-extension-pack-jdk/java/latest"
+      },
+      "path": "bash",
+      "args": [
+        "--rcfile",
+        "/home/jschein/.vscode-server/data/User/globalStorage/pleiades.java-extension-pack-jdk/.bashrc"
+      ]
+    }
+  },
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "maven.terminal.customEnv": [
+    {
+      "environmentVariable": "JAVA_HOME",
+      "value": "/Users/jschein/Library/Application Support/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/latest"
+    },
+    {
+      "environmentVariable": "ZDOTDIR",
+      "value": "/Users/jschein/Library/Application Support/Code/User/globalStorage/pleiades.java-extension-pack-jdk"
+    }
+  ],
+  "debug.autoExpandLazyVariables": "off",
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
+  },
+  "terminal.integrated.profiles.windows": {
+    "JavaSE-1.8 LTS": {
+      "overrideName": true,
+      "env": {
+        "PATH": "C:\\Users\\jason\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\8\\bin;${env:PATH}",
+        "JAVA_HOME": "C:\\Users\\jason\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\8"
+      },
+      "path": "cmd"
+    },
+    "JavaSE-11 LTS": {
+      "overrideName": true,
+      "env": {
+        "PATH": "C:\\Users\\jason\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\11\\bin;${env:PATH}",
+        "JAVA_HOME": "C:\\Users\\jason\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\11"
+      },
+      "path": "cmd"
+    },
+    "JavaSE-17 LTS": {
+      "overrideName": true,
+      "env": {
+        "PATH": "C:\\Program Files\\Java\\jdk-17\\bin;${env:PATH}",
+        "JAVA_HOME": "C:\\Program Files\\Java\\jdk-17"
+      },
+      "path": "cmd"
+    }
+  },
+  "terminal.integrated.automationProfile.windows": {
+    "path": "cmd"
+  },
+  "java.test.config": {
+    "vmArgs": ["-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8"]
+  },
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[svelte]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "postman.settings.dotenv-detection-notification-visibility": false,
+  "typescript.tsserver.log": "off",
+  "thunder-client.requestLayout": "Top/Bottom",
+  "maven.executable.path": "/Users/jschein/Library/Application Support/Code/User/globalStorage/pleiades.java-extension-pack-jdk/maven/latest/bin/mvn",
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+  "java.import.gradle.home": "/Users/jschein/Library/Application Support/Code/User/globalStorage/pleiades.java-extension-pack-jdk/gradle/latest",
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-11",
+      "path": "/Users/jschein/Library/Application Support/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/11"
+    },
+    {
+      "name": "JavaSE-17",
+      "path": "/Users/jschein/Library/Application Support/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/17"
+    },
+    {
+      "name": "JavaSE-21",
+      "path": "/Users/jschein/Library/Application Support/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/21"
+    },
+    {
+      "name": "JavaSE-25",
+      "path": "/Users/jschein/Library/Application Support/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/latest",
+      "default": true
+    }
+  ],
+  "terminal.integrated.profiles.osx": {
+    "zsh": {
+      "path": "zsh",
+      "env": {
+        "JAVA_HOME": "/Users/jschein/Library/Application Support/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/21",
+        "ZDOTDIR": "/Users/jschein/Library/Application Support/Code/User/globalStorage/pleiades.java-extension-pack-jdk"
+      }
+    },
+    "bash-homebrew": {
+      "path": "/opt/homebrew/bin/bash",
+      "args": [
+        "-l"
+      ],
+      "icon": "terminal-bash"
+    },
+    "JavaSE-11 LTS": {
+      "overrideName": true,
+      "env": {
+        "JAVA_HOME": "/Users/jschein/Library/Application Support/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/11"
+      },
+      "path": "zsh"
+    },
+    "JavaSE-17 LTS": {
+      "overrideName": true,
+      "env": {
+        "JAVA_HOME": "/Users/jschein/Library/Application Support/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/17"
+      },
+      "path": "zsh"
+    },
+    "JavaSE-21 LTS": {
+      "overrideName": true,
+      "env": {
+        "JAVA_HOME": "/Users/jschein/Library/Application Support/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/21"
+      },
+      "path": "zsh"
+    },
+    "JavaSE-25 LTS": {
+      "overrideName": true,
+      "env": {
+        "JAVA_HOME": "/Users/jschein/Library/Application Support/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/latest"
+      },
+      "path": "zsh"
+    }
+  },
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "java.import.gradle.java.home": "/Users/jschein/Library/Application Support/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/21",
+  "terminal.external.osxExec": "Iterm2.app",
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "githubPullRequests.terminalLinksHandler": "github",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "gitlens.advanced.messages": {
+    "suppressCommitNotFoundWarning": true
+  },
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": false,
+    "scminput": false
+  },
+  "chat.viewSessions.orientation": "stacked"
+  // "[github-actions-workflow]": {
+  //   "editor.defaultFormatter": "redhat.vscode-yaml"
+  // }
 }
